@@ -1,5 +1,7 @@
-package com.ssafy.web.user;
+package com.ssafy.web.user.service;
 
+import com.ssafy.web.user.dto.UserDto;
+import com.ssafy.web.user.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

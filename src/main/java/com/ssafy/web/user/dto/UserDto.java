@@ -1,4 +1,4 @@
-package com.ssafy.web.user;
+package com.ssafy.web.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
