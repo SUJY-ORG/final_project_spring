@@ -54,4 +54,10 @@ public class UserController {
 		}
 	}
 
+	@PostMapping("/logout")
+	public ResponseEntity<String> logout(HttpSession httpSession) {
+		httpSession.invalidate();
+		return new ResponseEntity<>("성공", HttpStatus.OK);
+	}
+
 }
