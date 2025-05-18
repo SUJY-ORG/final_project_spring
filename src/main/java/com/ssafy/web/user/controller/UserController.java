@@ -3,6 +3,7 @@ package com.ssafy.web.user.controller;
 import com.ssafy.web.user.dto.UserLoginRequestDto;
 import com.ssafy.web.user.dto.UserSignupRequestDto;
 import com.ssafy.web.user.dto.UserDto;
+import com.ssafy.web.user.service.MailService;
 import com.ssafy.web.user.service.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import java.util.UUID;
 public class UserController {
 	
 	private final UserService userService;
+	private final MailService mailService;
 
 	// TODO: 중복 확인 필요
 	@PostMapping("/signup")
@@ -58,6 +60,15 @@ public class UserController {
 	@PostMapping("/logout")
 	public ResponseEntity<String> logout(HttpSession httpSession) {
 		httpSession.invalidate();
+		return new ResponseEntity<>("성공", HttpStatus.OK);
+	}
+
+	// TODO: 개선 필요
+	@PostMapping("/signup/email-verification-request")
+	public ResponseEntity sendMessage(@RequestParam String email) {
+		String title = "SSAFY 관통 프로젝트 이메일";
+		String authCode = "Auth Code Test";
+		mailService.sendEmail(email, title, authCode);
 		return new ResponseEntity<>("성공", HttpStatus.OK);
 	}
 
