@@ -150,6 +150,5 @@ buildNumber.properties
 
 
 # Custom
-**/src/main/resources/**
-*.xml
 *.properties
+.DS_Store

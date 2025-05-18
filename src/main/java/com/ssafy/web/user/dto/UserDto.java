@@ -9,17 +9,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserDto {
 	private Long userId;
-	private String userServiceId;
+	private String serviceId;
 	private String password;
-	private Integer age;
-	private String gender;
-	private String tendency;
+	private String email;
+	private String preference;
 	
-	public UserDto(SignupRequestUserDto signupRequestUserDto) {
-		this.userServiceId = signupRequestUserDto.getUserServiceId();
-		this.password = signupRequestUserDto.getPassword();
-		this.age = signupRequestUserDto.getAge();
-		this.gender = signupRequestUserDto.getGender();
-		this.tendency = signupRequestUserDto.getTendency();
+	public UserDto(UserSignupRequestDto userSignupRequestDto) {
+		this.serviceId = userSignupRequestDto.getServiceId();
+		this.password = userSignupRequestDto.getPassword();
+		this.email = userSignupRequestDto.getEmail();
+		this.preference = userSignupRequestDto.getPreference();
 	}
 }

@@ -15,5 +15,9 @@ public class UserService {
 	public int signup(UserDto dto) {
 		return userMapper.signup(dto);
 	}
+
+	public UserDto login(String serviceId, String password) {
+		return userMapper.login(serviceId, password);
+	}
 	
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.web.user.mapper.UserMapper">
+	<insert id="signup" parameterType="com.ssafy.web.user.dto.UserDto">
+		INSERT INTO users (service_id, password, email, preference)
+		VALUES (#{serviceId}, #{password}, #{email}, #{preference})
+	</insert>
+
+	<select id="login" resultType="com.ssafy.web.user.dto.UserDto">
+		SELECT user_id as userId, service_id as serviceId, password, preference
+		FROM users u
+		WHERE u.service_id = #{serviceId}
+		AND u.password = #{password}
+	</select>
+</mapper>
