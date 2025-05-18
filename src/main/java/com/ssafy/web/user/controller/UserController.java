@@ -21,7 +21,8 @@ import java.util.UUID;
 public class UserController {
 	
 	private final UserService userService;
-	
+
+	// TODO: 중복 확인 필요
 	@PostMapping("/signup")
 	public ResponseEntity<String> signup_post(@RequestBody UserSignupRequestDto userSignupRequestDto) {
 		UserDto signupUser = new UserDto(userSignupRequestDto);
