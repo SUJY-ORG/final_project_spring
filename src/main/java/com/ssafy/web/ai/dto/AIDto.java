@@ -1,4 +1,4 @@
-package com.ssafy.web.map;
+package com.ssafy.web.ai.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
