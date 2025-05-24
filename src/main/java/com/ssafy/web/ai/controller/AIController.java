@@ -1,5 +1,6 @@
 package com.ssafy.web.ai.controller;
 
+import com.ssafy.web.ai.dto.JudgeRequestDto;
 import org.springframework.web.bind.annotation.*;
 
 import com.ssafy.web.ai.service.AIService;
@@ -13,10 +14,9 @@ public class AIController {
 	
 	private final AIService aiService;
 	
-	@GetMapping
-	public String test() {
-		var res = aiService.querying("안녕");
-		return res.toString();
+	@GetMapping("/judge")
+	public String judge_get(JudgeRequestDto judgeRequestDto) {
+		return aiService.querying(judgeRequestDto);
 	}
 	
 }

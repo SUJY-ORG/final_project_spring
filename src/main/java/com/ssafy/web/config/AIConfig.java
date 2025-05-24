@@ -13,7 +13,6 @@ public class AIConfig {
 	
 	@Bean
 	ChatClient chatClient(ChatClient.Builder builder) {
-		System.out.println(systemPrompt);
 		return builder.defaultSystem(systemPrompt).build();
 	}
 	
