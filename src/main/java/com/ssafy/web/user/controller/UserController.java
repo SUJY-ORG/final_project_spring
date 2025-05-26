@@ -31,9 +31,15 @@ public class UserController {
 	private final EmailCodeManager emailCodeManager;
 
 	@PostMapping("/signup")
-	public ResponseEntity<String> signup_post(@RequestBody UserSignupRequestDto dto) {
+	public ResponseEntity<String> signup_post(@RequestBody UserSignupRequestDto dto) throws InterruptedException {
+		
+		
+		// 회원가입 처리
 		UserDto signupUser = new UserDto(dto);
 		int result = userService.signup(signupUser);
+		
+		
+		
 		if (result == 1) {
 			System.out.println("성공");
 			return new ResponseEntity<>("성공", HttpStatus.OK);
