@@ -7,4 +7,9 @@
 		INSERT INTO user_salt (user_id, salt)
 		VALUES (#{userId}, #{salt})
 	</insert>
+	
+	<select id="findUserSaltById" resultType="map">
+		SELECT salt FROM user_salt u
+		WHERE u.user_id = #{userId}
+	</select>
 </mapper>

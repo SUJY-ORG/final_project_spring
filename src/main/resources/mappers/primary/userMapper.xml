@@ -13,6 +13,5 @@
 		SELECT user_id as userId, service_id as serviceId, password, preference
 		FROM users u
 		WHERE u.service_id = #{serviceId}
-		AND u.password = #{password}
 	</select>
 </mapper>

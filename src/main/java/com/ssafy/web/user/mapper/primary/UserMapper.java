@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper {
 	int signup(UserDto user);
 	UserDto login(
-			@Param("serviceId") String serviceId,
-			@Param("password") String password
+		@Param("serviceId") String serviceId
 	);
 }

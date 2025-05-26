@@ -5,7 +5,7 @@ import com.ssafy.web.user.mapper.primary.UserMapper;
 import com.ssafy.web.user.mapper.secondary.SaltMapper;
 import com.ssafy.web.util.Argon2Hash;
 
-import java.util.Base64;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class UserService {
 		
 		// salt 저장
 		int result1 = userMapper.signup(dto);
-		int result2 = saltMapper.addUserSalt(dto.getUserId(), Base64.getEncoder().encodeToString(salt));
+		int result2 = saltMapper.addUserSalt(dto.getUserId(), salt);
 		
 		long left = System.currentTimeMillis() - startTime;
 		long delay = 1000 - left;
@@ -41,7 +41,22 @@ public class UserService {
 	}
 
 	public UserDto login(String serviceId, String password) {
-		return userMapper.login(serviceId, password);
+		UserDto loginUser = userMapper.login(serviceId);
+		System.out.println("loginUser = " + loginUser);
+		if (loginUser == null) return null;
+
+		Map<String, Object> result = saltMapper.findUserSaltById(loginUser.getUserId());
+		byte[] findSalt = (byte[]) result.get("salt");
+
+		if (findSalt == null) return null;
+		
+		String validationHashValue = Argon2Hash.createHash(findSalt, password);
+		System.out.println("validationHashValue = " + validationHashValue);
+		if (validationHashValue.equals(loginUser.getPassword())) {
+			return loginUser;
+		} else {
+			return null;
+		}
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.ssafy.web.user.mapper.secondary;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -7,6 +9,10 @@ import org.apache.ibatis.annotations.Param;
 public interface SaltMapper {
 	int addUserSalt(
 		@Param("userId") Long userId, 
-		@Param("salt") String salt
+		@Param("salt") byte[] salt
+	);
+	
+	Map<String, Object> findUserSaltById(
+		@Param("userId") Long userId
 	);
 }
