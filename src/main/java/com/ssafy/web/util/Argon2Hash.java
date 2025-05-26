@@ -10,7 +10,7 @@ import java.util.Base64;
 public class Argon2Hash {
 
     private static final int SALT_SIZE = 16;
-    private static final int ITERATION = 20;
+    private static final int ITERATION = 8;
     private static final int MEM_LIMIT = 66536;
     private static final int HASH_LENGTH = 32;
     private static final int PARALLELISM = 1;
