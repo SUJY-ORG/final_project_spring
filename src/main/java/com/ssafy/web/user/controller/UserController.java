@@ -7,8 +7,6 @@ import com.ssafy.web.user.dto.UserDto;
 import com.ssafy.web.user.service.MailService;
 import com.ssafy.web.user.service.UserService;
 import com.ssafy.web.util.EmailCodeManager;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Random;
-import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -32,12 +29,9 @@ public class UserController {
 	
 	@GetMapping
 	public ResponseEntity<Boolean> user_get(HttpSession httpSession) {
-		
-		if (httpSession.getAttribute("sessionId") != null) {
-			System.out.println("세션 확인 true " + httpSession.getAttribute("sessionId"));
+		if (httpSession.getAttribute("user") != null) {
 			return new ResponseEntity<>(true, HttpStatus.OK);
 		} else {
-			System.out.println("세션 확인 false " + httpSession.getAttribute("sessionId"));
 			return new ResponseEntity<>(false, HttpStatus.OK);
 		}
 	}
@@ -60,18 +54,9 @@ public class UserController {
 
 	@PostMapping("/login")
 	public ResponseEntity<String> login_post(
-			@RequestBody UserLoginRequestDto dto,
-			HttpServletResponse response,
-			HttpSession httpSession
-	) {
+			@RequestBody UserLoginRequestDto dto) {
 		UserDto loginUser = userService.login(dto.getServiceId(), dto.getPassword());
 		if (loginUser != null) {
-			String uuid = UUID.randomUUID().toString();
-			httpSession.setAttribute(uuid, loginUser);
-			Cookie cookie = new Cookie("sessionId", uuid);
-			cookie.setMaxAge(30 * 60);
-			cookie.setPath("/");
-			response.addCookie(cookie);
 			return new ResponseEntity<>("성공", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("실패", HttpStatus.BAD_REQUEST);
