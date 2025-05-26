@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ssafy.web.user.mapper.UserMapper">
-	<insert id="signup" parameterType="com.ssafy.web.user.dto.UserDto">
+<mapper namespace="com.ssafy.web.user.mapper.primary.UserMapper">
+	<insert id="signup" parameterType="com.ssafy.web.user.dto.UserDto" useGeneratedKeys="true"
+        keyProperty="userId">
 		INSERT INTO users (service_id, password, email, preference)
 		VALUES (#{serviceId}, #{password}, #{email}, #{preference})
 	</insert>

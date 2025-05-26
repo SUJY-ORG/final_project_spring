@@ -1,0 +1,8 @@
+CREATE DATABASE IF NOT EXISTS ssafy_salt;
+USE ssafy_salt;
+
+DROP TABLE IF EXISTS user_salt;
+CREATE TABLE IF NOT EXISTS user_salt (
+    user_id BIGINT,
+    salt VARCHAR(255)
+);

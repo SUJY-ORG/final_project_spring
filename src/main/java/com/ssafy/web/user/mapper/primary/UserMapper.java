@@ -1,4 +1,4 @@
-package com.ssafy.web.user.mapper;
+package com.ssafy.web.user.mapper.primary;
 
 import com.ssafy.web.user.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
