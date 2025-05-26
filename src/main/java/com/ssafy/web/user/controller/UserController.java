@@ -29,6 +29,18 @@ public class UserController {
 	private final UserService userService;
 	private final MailService mailService;
 	private final EmailCodeManager emailCodeManager;
+	
+	@GetMapping
+	public ResponseEntity<Boolean> user_get(HttpSession httpSession) {
+		
+		if (httpSession.getAttribute("sessionId") != null) {
+			System.out.println("세션 확인 true " + httpSession.getAttribute("sessionId"));
+			return new ResponseEntity<>(true, HttpStatus.OK);
+		} else {
+			System.out.println("세션 확인 false " + httpSession.getAttribute("sessionId"));
+			return new ResponseEntity<>(false, HttpStatus.OK);
+		}
+	}
 
 	@PostMapping("/signup")
 	public ResponseEntity<String> signup_post(@RequestBody UserSignupRequestDto dto) throws InterruptedException {
@@ -69,6 +81,7 @@ public class UserController {
 	@PostMapping("/logout")
 	public ResponseEntity<String> logout(HttpSession httpSession) {
 		httpSession.invalidate();
+		System.out.println("로그아웃");
 		return new ResponseEntity<>("성공", HttpStatus.OK);
 	}
 
