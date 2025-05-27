@@ -53,10 +53,10 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<String> login_post(
-			@RequestBody UserLoginRequestDto dto) {
+	public ResponseEntity<String> login_post(@RequestBody UserLoginRequestDto dto, HttpSession httpSession) {
 		UserDto loginUser = userService.login(dto.getServiceId(), dto.getPassword());
 		if (loginUser != null) {
+			httpSession.setAttribute("user", loginUser);
 			return new ResponseEntity<>("성공", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("실패", HttpStatus.BAD_REQUEST);
