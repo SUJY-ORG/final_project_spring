@@ -17,6 +17,7 @@ public class UserService {
 	
 	private final UserMapper userMapper;
 	private final SaltMapper saltMapper;
+	private final byte[] emptySalt = new byte[16];
 	
 	public int signup(UserDto dto) throws InterruptedException {
 		long startTime = System.currentTimeMillis();
@@ -43,11 +44,15 @@ public class UserService {
 	public UserDto login(String serviceId, String password) {
 		UserDto loginUser = userMapper.login(serviceId);
 		System.out.println("loginUser = " + loginUser);
-		if (loginUser == null) return null;
+
+		// 계정이 존재하지 않을 때에도 비밀번호 해싱
+		if (loginUser == null) {
+			Argon2Hash.createHash(emptySalt, password);
+			return null;
+		}
 
 		Map<String, Object> result = saltMapper.findUserSaltById(loginUser.getUserId());
 		byte[] findSalt = (byte[]) result.get("salt");
-
 		if (findSalt == null) return null;
 		
 		String validationHashValue = Argon2Hash.createHash(findSalt, password);
