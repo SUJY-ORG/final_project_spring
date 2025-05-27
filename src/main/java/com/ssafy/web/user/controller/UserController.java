@@ -54,7 +54,7 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<String> login_post(@RequestBody UserLoginRequestDto dto, HttpSession httpSession) {
+	public ResponseEntity<String> login_post(@RequestBody UserLoginRequestDto dto, HttpSession httpSession) throws InterruptedException {
 		Map<String, Object> resultMap = userService.login(dto.getServiceId(), dto.getPassword());
 		if (resultMap.get("result").equals("로그인 성공")) {
 			httpSession.setAttribute("user", (UserDto) resultMap.get("user"));
