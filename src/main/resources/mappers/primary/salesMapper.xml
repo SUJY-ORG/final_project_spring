@@ -3,7 +3,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.web.sales.mapper.SalesMapper">
-    <select id="getAllSalesThumbnailList" resultType="com.ssafy.web.sales.dto.SalesThumbnailResponseDto">
 
+    <select id="getSalesThumbnailList" parameterType="String" resultType="com.ssafy.web.sales.dto.SalesThumbnailResponseDto">
+        SELECT registered_sales_id, apt_name, price, address
+        FROM registered_sales
+        WHERE address LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <insert id="registSales" parameterType="com.ssafy.web.sales.dto.Sale">
+        INSERT INTO registered_sales(user_id, apt_name, price, lat, lng, address)
+        VALUES(
+        (SELECT user_id
+        FROM users
+        WHERE service_id = #{user_id}
+        ),
+        #{apt_name}, #{price}, #{lat}, #{lng}, #{address}
+        )
+    </insert>
+
+    <select id="saleInfo" parameterType="String" resultType="com.ssafy.web.sales.dto.Sale">
+        SELECT u.service_id, apt_name, price, address, lat, lng
+        FROM registered_sales s
+        INNER JOIN users u ON s.user_id = u.user_id
+        WHERE registered_sales_id = #{saleId}
     </select>
 </mapper>

@@ -1,15 +1,16 @@
 package com.ssafy.web.sales.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class SalesThumbnailResponseDto {
+@RequiredArgsConstructor
+public class Sale {
     private Long registered_sales_id;
     private String apt_name;
     private String price;
     private String address;
+    private String user_id;
+    private double lat;
+    private double lng;
 }

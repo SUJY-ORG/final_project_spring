@@ -8,8 +8,7 @@ CREATE TABLE users (
     service_id VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255),
-    preference VARCHAR(255),
-    fail_cnt INTEGER DEFAULT 0
+    preference VARCHAR(255)
 );
 
 CREATE TABLE registered_sales(
