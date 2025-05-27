@@ -10,4 +10,5 @@ public interface UserMapper {
 	UserDto login(
 		@Param("serviceId") String serviceId
 	);
+	void addFailCnt(Long userId);
 }

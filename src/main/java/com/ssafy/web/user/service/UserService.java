@@ -5,6 +5,7 @@ import com.ssafy.web.user.mapper.primary.UserMapper;
 import com.ssafy.web.user.mapper.secondary.SaltMapper;
 import com.ssafy.web.util.Argon2Hash;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -41,26 +42,41 @@ public class UserService {
 		return (result1 == 1 && result2 == 1) ? 1 : 0;
 	}
 
-	public UserDto login(String serviceId, String password) {
+	public Map<String, Object> login(String serviceId, String password) {
+		Map<String, Object> mp = new HashMap<>();
 		UserDto loginUser = userMapper.login(serviceId);
 		System.out.println("loginUser = " + loginUser);
 
 		// 계정이 존재하지 않을 때에도 비밀번호 해싱
 		if (loginUser == null) {
 			Argon2Hash.createHash(emptySalt, password);
-			return null;
+			mp.put("result", "로그인 실패");
+			return mp;
+		}
+
+		if (loginUser.getFailCnt() == 5) {
+			mp.put("result", "비밀번호 실패 횟수 제한에 도달해 계정이 잠금되었습니다. 관리자에게 연락해주세요.");
+			return mp;
 		}
 
 		Map<String, Object> result = saltMapper.findUserSaltById(loginUser.getUserId());
 		byte[] findSalt = (byte[]) result.get("salt");
-		if (findSalt == null) return null;
+		if (findSalt == null) {
+			mp.put("result", "로그인 실패");
+			return mp;
+		}
 		
 		String validationHashValue = Argon2Hash.createHash(findSalt, password);
 		System.out.println("validationHashValue = " + validationHashValue);
 		if (validationHashValue.equals(loginUser.getPassword())) {
-			return loginUser;
+			mp.put("result", "로그인 성공");
+			mp.put("user", loginUser);
+			return mp;
 		} else {
-			return null;
+			userMapper.addFailCnt(loginUser.getUserId());
+			System.out.println("fail cnt 증가" + loginUser.getFailCnt());
+			mp.put("result", "로그인 실패");
+			return mp;
 		}
 	}
 	

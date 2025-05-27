@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.Map;
 import java.util.Random;
 
 @Slf4j
@@ -38,7 +39,7 @@ public class UserController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<String> signup_post(@RequestBody UserSignupRequestDto dto) throws InterruptedException {
-		
+
 		// 회원가입 처리
 		UserDto signupUser = new UserDto(dto);
 		int result = userService.signup(signupUser);
@@ -54,12 +55,14 @@ public class UserController {
 
 	@PostMapping("/login")
 	public ResponseEntity<String> login_post(@RequestBody UserLoginRequestDto dto, HttpSession httpSession) {
-		UserDto loginUser = userService.login(dto.getServiceId(), dto.getPassword());
-		if (loginUser != null) {
-			httpSession.setAttribute("user", loginUser);
-			return new ResponseEntity<>("성공", HttpStatus.OK);
+		Map<String, Object> resultMap = userService.login(dto.getServiceId(), dto.getPassword());
+		if (resultMap.get("result").equals("로그인 성공")) {
+			httpSession.setAttribute("user", (UserDto) resultMap.get("user"));
+			return new ResponseEntity<>("로그인 성공", HttpStatus.OK);
+		} else if (!resultMap.get("result").equals("로그인 실패")) {
+			return new ResponseEntity<>((String) resultMap.get("result"), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>("실패", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>((String) resultMap.get("result"), HttpStatus.OK);
 		}
 	}
 

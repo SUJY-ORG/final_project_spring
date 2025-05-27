@@ -10,8 +10,14 @@
 	</insert>
 
 	<select id="login" resultType="com.ssafy.web.user.dto.UserDto">
-		SELECT user_id as userId, service_id as serviceId, password, preference
+		SELECT user_id as userId, service_id as serviceId, password, preference, fail_cnt as failCnt
 		FROM users u
 		WHERE u.service_id = #{serviceId}
 	</select>
+
+	<update id="addFailCnt" parameterType="Long">
+		UPDATE users
+		SET fail_cnt = fail_cnt + 1
+		WHERE user_id = #{userId}
+	</update>
 </mapper>

@@ -13,6 +13,7 @@ public class UserDto {
 	private String password;
 	private String email;
 	private String preference;
+	private Integer failCnt;
 	
 	public UserDto(UserSignupRequestDto userSignupRequestDto) {
 		this.serviceId = userSignupRequestDto.getServiceId();
