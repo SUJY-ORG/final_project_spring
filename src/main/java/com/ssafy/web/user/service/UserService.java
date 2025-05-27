@@ -33,7 +33,7 @@ public class UserService {
 		int result2 = saltMapper.addUserSalt(dto.getUserId(), salt);
 		
 		long left = System.currentTimeMillis() - startTime;
-		long delay = 1000 - left;
+		long delay = 2000 - left;
 
 		if (delay > 0) {
 			Thread.sleep(delay);
