@@ -39,12 +39,9 @@ public class UserController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<String> signup_post(@RequestBody UserSignupRequestDto dto) throws InterruptedException {
-
-		// 회원가입 처리
 		UserDto signupUser = new UserDto(dto);
-		int result = userService.signup(signupUser);
-		
-		if (result == 1) {
+		boolean result = userService.signup(signupUser);
+		if (result) {
 			System.out.println("성공");
 			return new ResponseEntity<>("성공", HttpStatus.OK);
 		} else {
@@ -55,14 +52,13 @@ public class UserController {
 
 	@PostMapping("/login")
 	public ResponseEntity<String> login_post(@RequestBody UserLoginRequestDto dto, HttpSession httpSession) throws InterruptedException {
-		Map<String, Object> resultMap = userService.login(dto.getServiceId(), dto.getPassword());
-		if (resultMap.get("result").equals("로그인 성공")) {
-			httpSession.setAttribute("user", (UserDto) resultMap.get("user"));
+		try {
+			UserDto loginUser = userService.login(dto.getServiceId(), dto.getPassword());
+			httpSession.setAttribute("user", loginUser);
 			return new ResponseEntity<>("로그인 성공", HttpStatus.OK);
-		} else if (!resultMap.get("result").equals("로그인 실패")) {
-			return new ResponseEntity<>((String) resultMap.get("result"), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>((String) resultMap.get("result"), HttpStatus.OK);
+		} catch (Exception e) {
+			log.debug(e.getMessage());
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
 		}
 	}
 
