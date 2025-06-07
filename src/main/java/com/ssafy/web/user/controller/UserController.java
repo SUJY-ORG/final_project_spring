@@ -42,10 +42,8 @@ public class UserController {
 		UserDto signupUser = new UserDto(dto);
 		boolean result = userService.signup(signupUser);
 		if (result) {
-			System.out.println("성공");
 			return new ResponseEntity<>("성공", HttpStatus.OK);
 		} else {
-			System.out.println("실패");
 			return new ResponseEntity<>("실패", HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -65,7 +63,6 @@ public class UserController {
 	@PostMapping("/logout")
 	public ResponseEntity<String> logout(HttpSession httpSession) {
 		httpSession.invalidate();
-		System.out.println("로그아웃");
 		return new ResponseEntity<>("성공", HttpStatus.OK);
 	}
 
