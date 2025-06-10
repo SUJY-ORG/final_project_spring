@@ -21,10 +21,10 @@
 ## 👋 소개
 **Judge Around**는 삼성 청년 SW 아카데미(이하 SSAFY)에서 진행한 최종 관통 프로젝트입니다. 회원가입 시 유저의 선호를 입력받고, 매물 조회 시 근처 1km 내의 정보와 선호를 조합해 AI 주거지 평가를 받는 서비스입니다. **보안강화**를 중점적으로 진행했으며, Salt Hashing, 다중 DB 운영, Hashing 시간 지연 및 고정을 적용했습니다.
 
-## 🏗️ 아키텍처
+## 🏛️ 아키텍처
 <img src="https://github.com/user-attachments/assets/2dfcb943-f653-4c62-aa1c-4332e95a733a">
 
-## 🛠️ 활용 기술
+## ️⚙️ ️️활용 기술
 
 
 ## 🧂 Salt Hashing
