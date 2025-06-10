@@ -24,8 +24,14 @@
 ## 📐 아키텍처
 <img src="https://github.com/user-attachments/assets/2dfcb943-f653-4c62-aa1c-4332e95a733a">
 
-## ️🛠️ ️️활용 기술
-![Java](https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg)
+## ️⚒️ ️️활용 기술
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" width="24" alt="Java"/>
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg" width="24" alt="Spring Boot"/>
+<img src="https://raw.githubusercontent.com/mybatis/brand/master/logo/mybatis-logo.svg" width="24" alt="MyBatis"/>
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg" width="24" alt="Vue.js"/>
+<img src="https://www.bouncycastle.org/images/bclogo.gif" width="24" alt="BouncyCastle"/>
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg" width="24" alt="Spring AI"/>
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" width="24" alt="MySQL"/>
 
 
 ## 🧂 Salt Hashing
