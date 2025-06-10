@@ -25,6 +25,7 @@
 <img src="https://github.com/user-attachments/assets/2dfcb943-f653-4c62-aa1c-4332e95a733a">
 
 ## ️🛠️ ️️활용 기술
+![Java](https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg)
 
 
 ## 🧂 Salt Hashing
