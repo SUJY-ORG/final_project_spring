@@ -12,7 +12,6 @@
 ## 컨텐츠 목록
 - [소개](#-소개)
 - [아키텍처](#-아키텍처)
-- [활용 기술](#-활용-기술)
 - [Salt Hashing](#-Salt-Hashing)
 - [Hashing 비용 증가](#-Hashing-비용-증가)
 - [Hashing 시간 고정](#-Hashing-시간-고정)
@@ -20,19 +19,10 @@
 
 ## 👋 소개
 **Judge Around**는 삼성 청년 SW 아카데미(이하 SSAFY)에서 진행한 최종 관통 프로젝트입니다. 회원가입 시 유저의 선호를 입력받고, 매물 조회 시 근처 1km 내의 정보와 선호를 조합해 AI 주거지 평가를 받는 서비스입니다. **보안강화**를 중점적으로 진행했으며, Salt Hashing, 다중 DB 운영, Hashing 시간 지연 및 고정을 적용했습니다.
+- **활용 기술**: Java(17), SpringBoot(3.4.5), SpringAI(1.0.0), MyBatis, MySql, Bouncycastle, Vue
 
 ## 📐 아키텍처
 <img src="https://github.com/user-attachments/assets/2dfcb943-f653-4c62-aa1c-4332e95a733a">
-
-## ️⚒️ ️️활용 기술
-<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" width="24" alt="Java"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg" width="24" alt="Spring Boot"/>
-<img src="https://raw.githubusercontent.com/mybatis/brand/master/logo/mybatis-logo.svg" width="24" alt="MyBatis"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg" width="24" alt="Vue.js"/>
-<img src="https://www.bouncycastle.org/images/bclogo.gif" width="24" alt="BouncyCastle"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg" width="24" alt="Spring AI"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" width="24" alt="MySQL"/>
-
 
 ## 🧂 Salt Hashing
 대소문자, 숫자, 특수문자 포함 10자리 비밀번호를 생성하는 경우의 수는 약 **53**경입니다. 또한 최근 MD5 해시 알고리즘 기준 RTX4090를 14개 병렬 연결 시 **초당 1500억**번 연산이 가능합니다. 즉, MD5 알고리즘으로 암호화된 비밀번호는 브루트포스 공격으로 약 **4.1**일만에 탈취가 가능합니다. 이러한 공격에 대응하기 위해 다음의 방식으로 보안을 강화했습니다.
